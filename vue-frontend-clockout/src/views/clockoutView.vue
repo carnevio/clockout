@@ -124,7 +124,7 @@ async function convertToBase64(): Promise<ProcessResponse | null> {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/process-img', {
+        const response = await fetch('https://api.clockout.ch/process-img', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
