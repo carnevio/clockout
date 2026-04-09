@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 from ocr import OCR_clipboard_image
 from pydantic import BaseModel
 import httpx
-from PIL import Image
 import base64
 
 

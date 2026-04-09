@@ -1,0 +1,6 @@
+pydantic
+datetime
+bs4
+fastapi
+Pillow
+easyocr
