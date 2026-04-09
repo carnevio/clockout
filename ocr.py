@@ -6,7 +6,7 @@ from datetime import datetime, date, timezone, timedelta
 
 
 path = "clipboard_screenshot.png"
-reader = easyocr.Reader(['de'], gpu=False)
+reader = easyocr.Reader(['de'], gpu=False, quantize=False)
 
 def save_clipboard_image():
     img = ImageGrab.grabclipboard()
