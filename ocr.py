@@ -21,6 +21,7 @@ def OCR_clipboard_image(image_path):
     img = Image.open(image_path)
     
     text = reader.readtext(image_path, detail=0)
+    print(f"OCR Text: {text}")
     text = ' '.join(text)
 
     text = re.sub(r'[.,;]', ':', text)
