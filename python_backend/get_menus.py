@@ -6,7 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 url = 'https://clients.eurest.ch/schindler/de/Internes%20Personalrestaurant'  
 
-def get_menus():
+async def get_menus():
     response = requests.get(url, verify=False)
     if response.status_code == 200:
         html_content = response.text

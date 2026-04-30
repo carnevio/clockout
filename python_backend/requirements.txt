@@ -1,6 +1,9 @@
 pydantic
-datetime
-bs4
 fastapi
+httpx
+requests
+urllib3
+beautifulsoup4
 Pillow
 easyocr
+isodate
