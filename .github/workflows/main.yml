@@ -1,0 +1,31 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  deploy:
+    name: SSH Deploy & Restart FastAPI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}      
+          script: |
+            set -e
+
+            cd /home/${{ secrets.SSH_USER }}/clockout/python_backend
+
+            git pull origin main
+
+            source venv/bin/activate
+            pip install -r requirements.txt
+
+            sudo systemctl restart fastapi.service
