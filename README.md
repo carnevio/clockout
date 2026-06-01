@@ -45,6 +45,7 @@ clockout/
 │   ├── ocr.py                   # EasyOCR text extraction & time string regex parser
 │   ├── func.py                  # Workday end-time calculations & ISO duration parsing
 │   ├── get_menus.py             # Web scraper for Schindler Eurest restaurant
+│   ├── API.md                   # Dedicated API documentation
 │   └── requirements.txt         # Backend Python packages
 │
 ├── vue-frontend-clockout/       # Vue 3 Frontend Web App
@@ -127,61 +128,8 @@ clockout/
 
 All API routes are served by the FastAPI application in `python_backend/main.py`.
 
-### 1. `POST /process-img`
-Parses a base64 encoded image containing time tracking stamps, calculates the end time, and returns the timestamps found.
-
-*   **Request Headers**: `Content-Type: application/json`
-*   **Request Body**:
-    ```json
-    {
-      "data": "iVBORw0KGgoAAAANS..." // Base64 representation of the screenshot
-    }
-    ```
-*   **Response Body**:
-    ```json
-    {
-      "end_time": "2026-06-01T17:11:00+02:00",
-      "times": [
-        "2026-06-01T07:41:00+02:00",
-        "2026-06-01T11:31:00+02:00",
-        "2026-06-01T12:14:00+02:00"
-      ]
-    }
-    ```
-
----
-
-### 2. `GET /menus`
-Scrapes the current daily menus from Eurest Personalrestaurant (Schindler).
-
-*   **Response Body**:
-    ```json
-    {
-      "1": {
-        "name": "Menü 1: Tagesschlager",
-        "desc": "Zarte Kalbsbrust mit Kartoffelstock und Saisongemüse"
-      },
-      "2": {
-        "name": "Menü 2: Vegi",
-        "desc": "Rotes Linsencurry mit Basmatireis und Naan-Brot"
-      }
-    }
-    ```
-
----
-
-### 3. `GET /transport/{target_location}`
-Fetches upcoming public transport departures from the station **Buchrain** to a custom destination around your workday end-time.
-
-*   **Parameters**:
-    *   `target_location` (Path string, required): Target destination (e.g. `Luzern`).
-    *   `end_time` (Query string ISO format, required): Time reference when you can leave (e.g. `2026-06-01T17:11:00`).
-    *   `walking_time` (Query string timedelta, optional): Extra minutes needed to walk to the station.
-    *   `minus_time` (Query string timedelta, optional): Margin of time allowed before target time.
-*   **Example Call**:
-    ```http
-    GET http://localhost:8000/transport/Luzern?end_time=2026-06-01T17:11:00
-    ```
+A full description of request schemas, path/query parameters, and response structures can be found in the dedicated documentation file:
+👉 **[python_backend/API.md](file:///Users/oiven/dev/clockout/python_backend/API.md)**
 
 ---
 
